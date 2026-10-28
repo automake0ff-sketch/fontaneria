@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Fontasevilla — Tu servicio de fontanería</title>
+  <style>
+    :root {
+      --primary-dark: #0f2d59;
+      --primary-blue: #1d5cb4;
+      --primary-hover: #16488e;
+      --bg-main: #ffffff;
+      --surface-gray: #f4f6f9;
+      --surface-card: #ffffff;
+      --border-color: #d8e0ea;
+      --text-main: #1a2332;
+      --text-muted: #53647b;
+      --amber-alert: #944a00;
+      --amber-bg: #fff8eb;
+      --amber-border: #ffd599;
+      --red-urgent: #c92a2a;
+      --red-bg: #fff1f1;
+      --red-border: #ffa8a8;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --tap-target: 48px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--surface-gray);
+      color: var(--text-main);
+      line-height: 1.45;
+      font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 500px;
+      min-height: 100vh;
+      background: var(--bg-main);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.06);
+    }
+
+    header {
+      background: var(--primary-dark);
+      color: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: #9cb9df;
+      display: block;
+    }
+
+    .btn-quick-call {
+      background: #2b7a4b;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: var(--tap-target);
+    }
+
+    .btn-quick-call:hover, .btn-quick-call:focus {
+      background: #23653e;
+      outline: 2px solid #ffffff;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .view-step {
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .view-step.active {
+      display: flex;
+    }
+
+    h1, h2 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      color: var(--primary-dark);
+    }
+
+    p.lead {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .service-card {
+      background: var(--surface-card);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.15s, background-color 0.15s;
+      min-height: 110px;
+      width: 100%;
+    }
+
+    .service-card:focus, .service-card:hover {
+      border-color: var(--primary-blue);
+      background-color: #f7faff;
+      outline: none;
+    }
+
+    .service-card.card-urgent {
+      border-color: #f4c2c2;
+    }
+
+    .service-card.card-urgent:hover, .service-card.card-urgent:focus {
+      border-color: var(--red-urgent);
+      background: var(--red-bg);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-urgent .card-title {
+      color: var(--red-urgent);
+    }
+
+    .card-scheduled .card-title {
+      color: var(--primary-blue);
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .alert-box {
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+
+    .alert-danger {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      color: var(--red-urgent);
+      font-weight: 500;
+    }
+
+    .alert-warning {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      color: var(--amber-alert);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      min-height: var(--tap-target);
+      background: var(--surface-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 0.98rem;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary-blue);
+    }
+
+    .option-btn.selected {
+      border-color: var(--primary-blue);
+      background: #eef5ff;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .option-btn.selected::after {
+      content: '✓';
+      color: var(--primary-blue);
+      font-weight: 700;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      min-height: var(--tap-target);
+      padding: 10px 12px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-family: inherit;
+      background: #ffffff;
+      color: var(--text-main);
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary-blue);
+      outline: 2px solid #bed6f7;
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .btn-secondary-action {
+      background: var(--surface-gray);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      min-height: var(--tap-target);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-secondary-action:hover {
+      background: #e8ecf2;
+    }
+
+    .photo-upload-area {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      background: #fafbfd;
+      cursor: pointer;
+    }
+
+    .thumbnails-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .thumb-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-del {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-urgent {
+      display: inline-block;
+      background: var(--red-bg);
+      color: var(--red-urgent);
+      border: 1px solid var(--red-border);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .badge-programado {
+      display: inline-block;
+      background: #eef5ff;
+      color: var(--primary-blue);
+      border: 1px solid #bed6f7;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .summary-card {
+      background: var(--surface-gray);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.92rem;
+    }
+
+    .summary-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-bottom: 1px solid #e1e7ef;
+      padding-bottom: 8px;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .summary-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .summary-value {
+      color: var(--text-main);
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    .nav-bar {
+      margin-top: auto;
+      padding-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-main {
+      flex: 1;
+      min-height: 52px;
+      background: var(--primary-blue);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-main:hover, .btn-main:focus {
+      background: var(--primary-hover);
+    }
+
+    .btn-back {
+      min-height: 52px;
+      padding: 0 16px;
+      background: transparent;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-whatsapp {
+      background: #128c7e;
+      color: #ffffff;
+    }
+
+    .btn-whatsapp:hover, .btn-whatsapp:focus {
+      background: #0b685d;
+    }
+
+    .btn-phone-call {
+      background: var(--primary-dark);
+      color: #ffffff;
+    }
+
+    .error-msg {
+      color: var(--red-urgent);
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    footer {
+      padding: 16px 20px;
+      background: var(--surface-gray);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <div>
+        <span class="brand-title">Fontasevilla</span>
+        <span class="brand-sub">Francisco González • Fontanería</span>
+      </div>
+      <a href="tel:+34616826965" class="btn-quick-call" aria-label="Llamar directamente a Fontasevilla al 616 82 69 65">
+        📞 Llamar
+      </a>
+    </header>
+
+    <main id="main-content">
+      <!-- PANTALLA INICIAL -->
+      <section id="step-home" class="view-step active" aria-labelledby="home-title">
+        <div>
+          <h1 id="home-title">¿Qué problema de fontanería necesitas resolver?</h1>
+          <p class="lead" style="margin-top: 8px;">
+            Cuéntanos qué ocurre, dónde estás y cuándo necesitas el servicio. Te ayudamos a preparar una solicitud clara para facilitar el contacto.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 10px;">
+          <button type="button" class="service-card card-urgent" onclick="app.startFlow('urgent')">
+            <span class="card-title">🚨 Tengo una urgencia</span>
+            <span class="card-desc">«Tengo una fuga, una avería activa u otro problema que necesita atención prioritaria».</span>
+          </button>
+
+          <button type="button" class="service-card card-scheduled" onclick="app.startFlow('scheduled')">
+            <span class="card-title">📅 Quiero programar un trabajo</span>
+            <span class="card-desc">«Necesito instalar, reparar, sustituir o revisar una instalación y quiero consultar una cita».</span>
+          </button>
+        </div>
+
+        <div class="alert-box alert-warning" style="margin-top: auto;">
+          <strong>Nota de servicio:</strong> Dirección de referencia en C. Pino Siberia, 1, Sevilla. No prometemos atención permanente 24 horas ni tiempos de llegada inmediatos sin valoración previa del profesional.
+        </div>
+      </section>
+
+      <!-- PASO: ADVERTENCIA SEGURIDAD (URGENCIAS) -->
+      <section id="step-u-safety" class="view-step" aria-labelledby="safety-title">
+        <span class="badge-urgent">Atención prioritaria</span>
+        <h2 id="safety-title">Medidas prioritarias de seguridad</h2>
+        
+        <div class="alert-box alert-danger">
+          «Si existe peligro inmediato para las personas, riesgo eléctrico, incendio o una situación que pueda causar lesiones, aléjate del peligro y contacta con los servicios de emergencia correspondientes (112). Este formulario no sustituye una llamada urgente».
+        </div>
+
+        <div class="alert-box alert-warning">
+          <strong>Recomendación general:</strong> Cuando sea completamente seguro hacerlo y conozcas su ubicación, <strong>cierra la llave de paso general del agua</strong> para mitigar daños por inundación. No manipules enchufes mojados ni instalaciones eléctricas.
+        </div>
+
+        <p class="lead">Para una avería activa que no pueda esperar, te recomendamos hablar directamente con el profesional.</p>
+
+        <a href="tel:+34616826965" class="btn-main btn-phone-call" style="text-decoration:none;">
+          📞 Llamar ahora (+34 616 82 69 65)
+        </a>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goHome()">Inicio</button>
+          <button type="button" class="btn-main" onclick="app.goToStep('step-u-problem')">Continuar solicitud</button>
+        </div>
+      </section>
+
+      <!-- PASO: ¿QUÉ OCURRE? (URGENCIAS) -->
+      <section id="step-u-problem" class="view-step" aria-labelledby="u-prob-title">
+        <span class="badge-urgent">Urgencia • Paso 1</span>
+        <h2 id="u-prob-title">¿Qué está ocurriendo?</h2>
+        <div class="options-grid" id="opt-urgent-issues">
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Fuga de agua', this)">Fuga de agua</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Tubería rota', this)">Tubería rota</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Desagüe atascado', this)">Desagüe atascado</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Problema con el inodoro', this)">Problema con el inodoro</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Problema con el grifo o lavabo', this)">Problema con el grifo o lavabo</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Problema con la ducha o bañera', this)">Problema con la ducha o bañera</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Problema con el calentador o agua caliente', this)">Calentador o agua caliente</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Baja presión de agua', this)">Baja presión de agua</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentIssue', 'Otro problema', this)">Otro problema</button>
+        </div>
+        <p id="err-u-problem" class="error-msg">Selecciona una opción para continuar.</p>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goToStep('step-u-safety')">Atrás</button>
+          <button type="button" class="btn-main" onclick="app.validateUrgentProblem()">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- PASO: ¿SIGUE ACTIVO? (URGENCIAS) -->
+      <section id="step-u-active" class="view-step" aria-labelledby="u-act-title">
+        <span class="badge-urgent">Urgencia • Paso 2</span>
+        <h2 id="u-act-title">¿Sigue ocurriendo ahora mismo?</h2>
+        <div class="options-grid" id="opt-urgent-active">
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentActiveStatus', 'Sí, sigue activo', this)">Sí, sigue activo</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentActiveStatus', 'Está controlado temporalmente', this)">Está controlado temporalmente</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('urgentActiveStatus', 'No estoy seguro', this)">No estoy seguro</button>
+        </div>
+        <p id="err-u-active" class="error-msg">Por favor indica el estado actual.</p>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goToStep('step-u-problem')">Atrás</button>
+          <button type="button" class="btn-main" onclick="app.validateUrgentActive()">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- PASO: TRABAJO PROGRAMADO - TIPO -->
+      <section id="step-s-type" class="view-step" aria-labelledby="s-type-title">
+        <span class="badge-programado">Trabajo programado • Paso 1</span>
+        <h2 id="s-type-title">¿Qué trabajo necesitas?</h2>
+        <div class="options-grid" id="opt-sched-types">
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Instalar un grifo o lavabo', this)">Instalar un grifo o lavabo</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Sustituir un inodoro', this)">Sustituir un inodoro</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Instalar o cambiar una ducha', this)">Instalar o cambiar una ducha</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Reparar una avería menor', this)">Reparar una avería menor</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Revisar una instalación', this)">Revisar una instalación</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Instalar o sustituir tuberías', this)">Instalar o sustituir tuberías</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Trabajo de fontanería en una reforma', this)">Fontanería en una reforma</button>
+          <button type="button" class="option-btn" onclick="app.selectSingle('schedJobType', 'Otro trabajo', this)">Otro trabajo</button>
+        </div>
+        <p id="err-s-type" class="error-msg">Selecciona un tipo de trabajo.</p>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goHome()">Atrás</button>
+          <button type="button" class="btn-main" onclick="app.validateSchedType()">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- PASO: CARACTERÍSTICAS Y PREFERENCIA DE CITA (PROGRAMADO) -->
+      <section id="step-s-details" class="view-step" aria-labelledby="s-details-title">
+        <span class="badge-programado">Trabajo programado • Paso 2</span>
+        <h2 id="s-details-title">Preferencia de fecha y presupuesto</h2>
+
+        <div class="form-group">
+          <label for="sched-date">Fecha preferida (orientativa)</label>
+          <input type="date" id="sched-date">
+        </div>
+
+        <div class="form-group">
+          <label for="sched-slot">Franja horaria preferida</label>
+          <select id="sched-slot">
+            <option value="Franja de mañana (09:00 - 14:00)">Franja de mañana (09:00 - 14:00)</option>
+            <option value="Franja de tarde (16:00 - 19:30)">Franja de tarde (16:00 - 19:30)</option>
+            <option value="Flexibilidad total de horario">Flexibilidad total de horario</option>
+          </select>
+        </div>
+
+        <div class="alert-box alert-warning">
+          <strong>Aviso:</strong> Esta es una preferencia de fecha y horario, no una cita confirmada. El profesional tendrá que confirmar la disponibilidad según agenda de trabajo.
+        </div>
+
+        <div class="form-group">
+          <label for="sched-budget">Presupuesto orientativo (opcional)</label>
+          <select id="sched-budget">
+            <option value="Prefiero consultarlo">Prefiero consultarlo</option>
+            <option value="Menos de 150 €">Menos de 150 €</option>
+            <option value="150–400 €">150–400 €</option>
+            <option value="400–1.000 €">400–1.000 €</option>
+            <option value="Más de 1.000 €">Más de 1.000 €</option>
+          </select>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Rangos de demo orientativos, no tarifas oficiales de Fontasevilla.</span>
+        </div>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goToStep('step-s-type')">Atrás</button>
+          <button type="button" class="btn-main" onclick="app.goToStep('step-common-location')">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- PASO COMÚN: UBICACIÓN Y DESCRIPCIÓN -->
+      <section id="step-common-location" class="view-step" aria-labelledby="loc-title">
+        <span id="badge-flow-location" class="badge-urgent">Ubicación</span>
+        <h2 id="loc-title">¿Dónde ocurre y qué detalles presenta?</h2>
+
+        <div class="form-group">
+          <label for="loc-property">Tipo de inmueble</label>
+          <select id="loc-property">
+            <option value="Vivienda">Vivienda</option>
+            <option value="Comunidad de vecinos">Comunidad de vecinos</option>
+            <option value="Local comercial">Local comercial</option>
+            <option value="Oficina">Oficina</option>
+            <option value="Otro inmueble">Otro inmueble</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <button type="button" class="btn-secondary-action" onclick="app.requestGeolocation()">
+            📍 Compartir ubicación actual (opcional)
+          </button>
+          <span id="geo-status" style="font-size: 0.8rem; color: var(--text-muted);"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="loc-address">Dirección del servicio *</label>
+          <input type="text" id="loc-address" placeholder="Ej. Calle Sierpes 12">
+          <p id="err-loc-address" class="error-msg">Por favor indica la dirección.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="form-group">
+            <label for="loc-cp">Código postal *</label>
+            <input type="text" id="loc-cp" placeholder="41001" maxlength="5">
+            <p id="err-loc-cp" class="error-msg">Indica un C.P. válido.</p>
+          </div>
+          <div class="form-group">
+            <label for="loc-floor">Planta / Puerta (opcional)</label>
+            <input type="text" id="loc-floor" placeholder="3º B">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="loc-desc">Describe brevemente la avería o trabajo *</label>
+          <textarea id="loc-desc" placeholder="Por ejemplo: hay una fuga debajo del fregadero y el agua sigue saliendo"></textarea>
+          <p id="err-loc-desc" class="error-msg">Por favor escribe una breve descripción.</p>
+        </div>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.backFromLocation()">Atrás</button>
+          <button type="button" class="btn-main" onclick="app.validateLocationAndDesc()">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- PASO COMÚN: FOTOGRAFÍAS -->
+      <section id="step-common-photos" class="view-step" aria-labelledby="photo-title">
+        <span id="badge-flow-photo" class="badge-urgent">Fotografías</span>
+        <h2 id="photo-title">Fotografías de la incidencia (opcional)</h2>
+        <p class="lead">Puedes añadir hasta 4 imágenes (JPEG, PNG o WebP, máx. 8 MB por imagen) para entender mejor la instalación.</p>
+
+        <div class="photo-upload-area" onclick="document.getElementById('file-input').click()" role="button" tabindex="0" onkeypress="if(event.key==='Enter') document.getElementById('file-input').click()">
+          <span style="font-size: 1.8rem; display: block;">📷</span>
+          <strong>Pulsa para seleccionar fotos</strong>
+          <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Procesamiento local en tu teléfono</span>
+          <input type="file" id="file-input" class="visually-hidden" accept="image/jpeg,image/png,image/webp" multiple onchange="app.handleFiles(event)">
+        </div>
+        <p id="err-photo-msg" class="error-msg"></p>
+
+        <div class="thumbnails-grid" id="thumbs-container" aria-live="polite"></div>
+
+        <div class="alert-box alert-warning">
+          <strong>Aviso sobre privacidad:</strong> Las fotografías se procesan de forma privada en la memoria de tu navegador y no se suben a ningún servidor. Si contactas por WhatsApp, deberás adjuntarlas manualmente en el chat.
+        </div>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goToStep('step-common-location')">Atrás</button>
+          <button type="button" class="btn-main" onclick="app.goToStep('step-contact')">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- PASO: DATOS DE CONTACTO -->
+      <section id="step-contact" class="view-step" aria-labelledby="contact-title">
+        <span id="badge-flow-contact" class="badge-urgent">Tus datos</span>
+        <h2 id="contact-title">Datos de contacto</h2>
+        <p class="lead">Solo para poder responder a tu consulta sobre la avería.</p>
+
+        <div class="form-group">
+          <label for="contact-name">Nombre completo *</label>
+          <input type="text" id="contact-name" placeholder="Tu nombre">
+          <p id="err-contact-name" class="error-msg">Por favor indica tu nombre.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-phone">Teléfono de contacto *</label>
+          <input type="tel" id="contact-phone" placeholder="612 34 56 78">
+          <p id="err-contact-phone" class="error-msg">Indica un número de teléfono válido.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-email">Correo electrónico (opcional)</label>
+          <input type="email" id="contact-email" placeholder="nombre@correo.com">
+        </div>
+
+        <div class="form-group">
+          <label for="contact-pref">Preferencia de contacto</label>
+          <select id="contact-pref">
+            <option value="WhatsApp">Mensaje por WhatsApp</option>
+            <option value="Llamada telefónica">Llamada telefónica</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-notes">Comentarios adicionales (opcional)</label>
+          <textarea id="contact-notes" placeholder="Alguna indicación específica sobre el acceso, timbre, etc."></textarea>
+        </div>
+
+        <div class="alert-box alert-warning" style="font-size: 0.8rem;">
+          <strong>Privacidad:</strong> Esta demo conceptual no almacena tus datos en ningún servidor ni base de datos externa; quedan únicamente en la memoria local de tu navegador durante esta consulta.
+        </div>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goToStep('step-common-photos')">Atrás</button>
+          <button type="button" class="btn-main" onclick="app.validateContact()">Ver resumen</button>
+        </div>
+      </section>
+
+      <!-- PASO: RESUMEN Y ACCIÓN DE CONTACTO -->
+      <section id="step-summary" class="view-step" aria-labelledby="summary-title">
+        <div id="summary-badge-container"></div>
+        <h2 id="summary-title">Resumen de tu solicitud</h2>
+        <p class="lead">Revisa la información antes de iniciar el contacto.</p>
+
+        <div class="summary-card" id="summary-content">
+          <!-- Generado dinámicamente -->
+        </div>
+
+        <div class="alert-box alert-warning">
+          <strong>Recordatorio:</strong> Abrir WhatsApp o llamar prepara la consulta, pero no implica que el fontanero haya aceptado el trabajo de forma automática.
+          <span id="summary-photo-reminder" style="display:block; margin-top: 4px; font-weight:600;"></span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px;">
+          <a id="btn-action-wa" href="#" target="_blank" rel="noopener noreferrer" class="btn-main btn-whatsapp">
+            💬 Preparar mensaje por WhatsApp
+          </a>
+
+          <a href="tel:+34616826965" class="btn-main btn-phone-call">
+            📞 Llamar a Fontasevilla (+34 616 82 69 65)
+          </a>
+        </div>
+
+        <div class="nav-bar">
+          <button type="button" class="btn-back" onclick="app.goToStep('step-contact')">Editar datos</button>
+          <button type="button" class="btn-back" style="color: var(--red-urgent);" onclick="app.resetForm()">Reiniciar</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <strong>Fontasevilla — Francisco González</strong><br>
+      C. Pino Siberia, 1, Sevilla • Tel: +34 616 82 69 65<br><br>
+      <em>Prototipo conceptual independiente para Fontasevilla. No es un canal oficial de recepción de avisos. La disponibilidad, los horarios, los presupuestos y las citas deben confirmarse directamente con el profesional.</em>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const APP_PHONE = '+34616826965';
+      const APP_PHONE_CLEAN = '34616826965';
+
+      const state = {
+        flow: null, // 'urgent' | 'scheduled'
+        urgentIssue: '',
+        urgentActiveStatus: '',
+        schedJobType: '',
+        schedDate: '',
+        schedSlot: 'Franja de mañana (09:00 - 14:00)',
+        schedBudget: 'Prefiero consultarlo',
+        propertyType: 'Vivienda',
+        address: '',
+        postalCode: '',
+        floor: '',
+        coordinates: '',
+        description: '',
+        photos: [], // Array de { name, url, size }
+        contactName: '',
+        contactPhone: '',
+        contactEmail: '',
+        contactPref: 'WhatsApp',
+        contactNotes: ''
+      };
+
+      function setBadge(containerId, isUrgent) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        if (isUrgent) {
+          el.className = 'badge-urgent';
+          el.textContent = 'Urgencia';
+        } else {
+          el.className = 'badge-programado';
+          el.textContent = 'Trabajo programado';
+        }
+      }
+
+      window.app = {
+        goHome() {
+          app.goToStep('step-home');
+        },
+
+        goToStep(stepId) {
+          document.querySelectorAll('.view-step').forEach(step => {
+            step.classList.remove('active');
+          });
+          const target = document.getElementById(stepId);
+          if (target) {
+            target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        },
+
+        startFlow(flowType) {
+          state.flow = flowType;
+          const isUrgent = (flowType === 'urgent');
+          setBadge('badge-flow-location', isUrgent);
+          setBadge('badge-flow-photo', isUrgent);
+          setBadge('badge-flow-contact', isUrgent);
+
+          if (isUrgent) {
+            app.goToStep('step-u-safety');
+          } else {
+            app.goToStep('step-s-type');
+          }
+        },
+
+        backFromLocation() {
+          if (state.flow === 'urgent') {
+            app.goToStep('step-u-active');
+          } else {
+            app.goToStep('step-s-details');
+          }
+        },
+
+        selectSingle(stateKey, value, btnElement) {
+          state[stateKey] = value;
+          const parent = btnElement.parentElement;
+          parent.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+          btnElement.classList.add('selected');
+        },
+
+        validateUrgentProblem() {
+          const err = document.getElementById('err-u-problem');
+          if (!state.urgentIssue) {
+            err.style.display = 'block';
+            return;
+          }
+          err.style.display = 'none';
+          app.goToStep('step-u-active');
+        },
+
+        validateUrgentActive() {
+          const err = document.getElementById('err-u-active');
+          if (!state.urgentActiveStatus) {
+            err.style.display = 'block';
+            return;
+          }
+          err.style.display = 'none';
+          app.goToStep('step-common-location');
+        },
+
+        validateSchedType() {
+          const err = document.getElementById('err-s-type');
+          if (!state.schedJobType) {
+            err.style.display = 'block';
+            return;
+          }
+          err.style.display = 'none';
+          app.goToStep('step-s-details');
+        },
+
+        requestGeolocation() {
+          const status = document.getElementById('geo-status');
+          if (!navigator.geolocation) {
+            status.textContent = 'La geolocalización no es compatible con este navegador.';
+            return;
+          }
+          status.textContent = 'Solicitando permiso de ubicación...';
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const lat = position.coords.latitude.toFixed(5);
+              const lon = position.coords.longitude.toFixed(5);
+              state.coordinates = `${lat}, ${lon}`;
+              status.textContent = `Ubicación compartida: (${lat}, ${lon})`;
+            },
+            (error) => {
+              if (error.code === error.PERMISSION_DENIED) {
+                status.textContent = 'Permiso denegado. Introduce la dirección manualmente.';
+              } else {
+                status.textContent = 'No se pudo obtener la ubicación. Por favor escríbela.';
+              }
+            },
+            { timeout: 10000 }
+          );
+        },
+
+        validateLocationAndDesc() {
+          const addr = document.getElementById('loc-address').value.trim();
+          const cp = document.getElementById('loc-cp').value.trim();
+          const desc = document.getElementById('loc-desc').value.trim();
+          const prop = document.getElementById('loc-property').value;
+          const floor = document.getElementById('loc-floor').value.trim();
+
+          let valid = true;
+
+          const errAddr = document.getElementById('err-loc-address');
+          if (!addr) {
+            errAddr.style.display = 'block';
+            valid = false;
+          } else {
+            errAddr.style.display = 'none';
+          }
+
+          const errCp = document.getElementById('err-loc-cp');
+          if (!cp || cp.length < 4) {
+            errCp.style.display = 'block';
+            valid = false;
+          } else {
+            errCp.style.display = 'none';
+          }
+
+          const errDesc = document.getElementById('err-loc-desc');
+          if (!desc) {
+            errDesc.style.display = 'block';
+            valid = false;
+          } else {
+            errDesc.style.display = 'none';
+          }
+
+          if (!valid) return;
+
+          state.address = addr;
+          state.postalCode = cp;
+          state.description = desc;
+          state.propertyType = prop;
+          state.floor = floor;
+
+          // Si viene de programado, capturar inputs de ese paso también
+          if (state.flow === 'scheduled') {
+            state.schedDate = document.getElementById('sched-date').value;
+            state.schedSlot = document.getElementById('sched-slot').value;
+            state.schedBudget = document.getElementById('sched-budget').value;
+          }
+
+          app.goToStep('step-common-photos');
+        },
+
+        handleFiles(event) {
+          const files = Array.from(event.target.files);
+          const errEl = document.getElementById('err-photo-msg');
+          errEl.style.display = 'none';
+          errEl.textContent = '';
+
+          const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+          const maxSize = 8 * 1024 * 1024; // 8MB
+
+          for (const file of files) {
+            if (state.photos.length >= 4) {
+              errEl.textContent = 'Máximo permitido: 4 fotografías.';
+              errEl.style.display = 'block';
+              break;
+            }
+            if (!validTypes.includes(file.type)) {
+              errEl.textContent = 'Formato no admitido. Usa JPEG, PNG o WebP.';
+              errEl.style.display = 'block';
+              continue;
+            }
+            if (file.size > maxSize) {
+              errEl.textContent = `La foto "${file.name}" supera los 8 MB permitidos.`;
+              errEl.style.display = 'block';
+              continue;
+            }
+
+            const objectUrl = URL.createObjectURL(file);
+            state.photos.push({ name: file.name, url: objectUrl, size: file.size });
+          }
+
+          event.target.value = '';
+          app.renderThumbnails();
+        },
+
+        removePhoto(index) {
+          if (state.photos[index]) {
+            URL.revokeObjectURL(state.photos[index].url);
+            state.photos.splice(index, 1);
+            app.renderThumbnails();
+          }
+        },
+
+        renderThumbnails() {
+          const container = document.getElementById('thumbs-container');
+          container.innerHTML = '';
+          state.photos.forEach((photo, idx) => {
+            const div = document.createElement('div');
+            div.className = 'thumb-item';
+            div.innerHTML = `
+              <img src="${photo.url}" alt="Foto ${idx + 1} de la avería">
+              <button type="button" class="thumb-del" onclick="app.removePhoto(${idx})" aria-label="Eliminar foto ${idx + 1}">×</button>
+            `;
+            container.appendChild(div);
+          });
+        },
+
+        validateContact() {
+          const name = document.getElementById('contact-name').value.trim();
+          const phone = document.getElementById('contact-phone').value.trim();
+          const email = document.getElementById('contact-email').value.trim();
+          const pref = document.getElementById('contact-pref').value;
+          const notes = document.getElementById('contact-notes').value.trim();
+
+          let valid = true;
+
+          const errName = document.getElementById('err-contact-name');
+          if (!name) {
+            errName.style.display = 'block';
+            valid = false;
+          } else {
+            errName.style.display = 'none';
+          }
+
+          const errPhone = document.getElementById('err-contact-phone');
+          const phoneRegex = /^[0-9+\s-]{8,15}$/;
+          if (!phone || !phoneRegex.test(phone)) {
+            errPhone.style.display = 'block';
+            valid = false;
+          } else {
+            errPhone.style.display = 'none';
+          }
+
+          if (!valid) return;
+
+          state.contactName = name;
+          state.contactPhone = phone;
+          state.contactEmail = email;
+          state.contactPref = pref;
+          state.contactNotes = notes;
+
+          app.renderSummary();
+          app.goToStep('step-summary');
+        },
+
+        renderSummary() {
+          const isUrgent = (state.flow === 'urgent');
+          const badgeContainer = document.getElementById('summary-badge-container');
+          badgeContainer.innerHTML = isUrgent
+            ? '<span class="badge-urgent">Solicitud: Urgencia</span>'
+            : '<span class="badge-programado">Solicitud: Trabajo programado</span>';
+
+          const summary = document.getElementById('summary-content');
+          let html = '';
+
+          if (isUrgent) {
+            html += `
+              <div class="summary-item">
+                <span class="summary-label">Tipo de avería</span>
+                <span class="summary-value">${state.urgentIssue}</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Estado actual</span>
+                <span class="summary-value">${state.urgentActiveStatus}</span>
+              </div>
+            `;
+          } else {
+            html += `
+              <div class="summary-item">
+                <span class="summary-label">Tipo de trabajo</span>
+                <span class="summary-value">${state.schedJobType}</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Preferencia de fecha</span>
+                <span class="summary-value">${state.schedDate || 'Sin fecha específica'} (${state.schedSlot})</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Presupuesto orientativo</span>
+                <span class="summary-value">${state.schedBudget}</span>
+              </div>
+            `;
+          }
+
+          html += `
+            <div class="summary-item">
+              <span class="summary-label">Inmueble y ubicación</span>
+              <span class="summary-value">${state.propertyType} • ${state.address} (C.P. ${state.postalCode}) ${state.floor ? '• ' + state.floor : ''}</span>
+              ${state.coordinates ? `<span style="font-size:0.8rem; color:var(--text-muted);">Coordenadas: ${state.coordinates}</span>` : ''}
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Descripción</span>
+              <span class="summary-value">${state.description}</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Fotografías adjuntadas en demo</span>
+              <span class="summary-value">${state.photos.length > 0 ? state.photos.length + ' foto(s) preparadas localmente' : 'Ninguna fotografía seleccionada'}</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Contacto</span>
+              <span class="summary-value">${state.contactName} (${state.contactPhone}) • Prefiere ${state.contactPref}</span>
+            </div>
+          `;
+
+          if (state.contactNotes) {
+            html += `
+              <div class="summary-item">
+                <span class="summary-label">Comentarios</span>
+                <span class="summary-value">${state.contactNotes}</span>
+              </div>
+            `;
+          }
+
+          summary.innerHTML = html;
+
+          const photoReminder = document.getElementById('summary-photo-reminder');
+          if (state.photos.length > 0) {
+            photoReminder.textContent = '«Si has añadido fotografías, adjúntalas manualmente a la conversación de WhatsApp».';
+          } else {
+            photoReminder.textContent = '';
+          }
+
+          // Preparación del enlace de WhatsApp
+          let msg = '';
+          if (isUrgent) {
+            msg = `Hola, soy ${state.contactName}. Quería consultar una avería de fontanería.
+Tipo de problema: ${state.urgentIssue}.
+Estado: ${state.urgentActiveStatus}.
+Dirección: ${state.address}${state.floor ? ', ' + state.floor : ''}.
+Código postal: ${state.postalCode}.
+Descripción: ${state.description}.
+Teléfono de contacto: ${state.contactPhone}.
+¿Podéis indicarme si es posible atender esta incidencia y cuáles serían los siguientes pasos?`;
+          } else {
+            msg = `Hola, soy ${state.contactName}. Quería consultar presupuesto o cita para un trabajo de fontanería.
+Tipo de trabajo: ${state.schedJobType}.
+Inmueble: ${state.propertyType}.
+Dirección: ${state.address}${state.floor ? ', ' + state.floor : ''}.
+Código postal: ${state.postalCode}.
+Preferencia: ${state.schedDate || 'Flexible'} (${state.schedSlot}).
+Presupuesto orientativo: ${state.schedBudget}.
+Descripción: ${state.description}.
+Teléfono de contacto: ${state.contactPhone}.
+¿Podríais confirmarme disponibilidad y cómo proceder?`;
+          }
+
+          const waUrl = `https://wa.me/${APP_PHONE_CLEAN}?text=${encodeURIComponent(msg)}`;
+          document.getElementById('btn-action-wa').setAttribute('href', waUrl);
+        },
+
+        resetForm() {
+          state.photos.forEach(p => URL.revokeObjectURL(p.url));
+          state.flow = null;
+          state.urgentIssue = '';
+          state.urgentActiveStatus = '';
+          state.schedJobType = '';
+          state.schedDate = '';
+          state.schedSlot = 'Franja de mañana (09:00 - 14:00)';
+          state.schedBudget = 'Prefiero consultarlo';
+          state.propertyType = 'Vivienda';
+          state.address = '';
+          state.postalCode = '';
+          state.floor = '';
+          state.coordinates = '';
+          state.description = '';
+          state.photos = [];
+          state.contactName = '';
+          state.contactPhone = '';
+          state.contactEmail = '';
+          state.contactPref = 'WhatsApp';
+          state.contactNotes = '';
+
+          // Reset inputs
+          document.getElementById('loc-address').value = '';
+          document.getElementById('loc-cp').value = '';
+          document.getElementById('loc-floor').value = '';
+          document.getElementById('loc-desc').value = '';
+          document.getElementById('sched-date').value = '';
+          document.getElementById('contact-name').value = '';
+          document.getElementById('contact-phone').value = '';
+          document.getElementById('contact-email').value = '';
+          document.getElementById('contact-notes').value = '';
+          document.getElementById('geo-status').textContent = '';
+          document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+          app.renderThumbnails();
+
+          app.goHome();
+        }
+      };
+
+      // Configuración de fecha mínima en selector (a partir de hoy)
+      const dateInput = document.getElementById('sched-date');
+      if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+      }
+    })();
+  </script>
+</body>
+</html>
