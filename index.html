@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Fontasevilla — Fontanería · Sevilla</title>
-  <meta name="description" content="Solicitudes y presupuestos de fontanería para Sevilla. Fontasevilla — Francisco González.">
+  <title>Fontasevilla · Asistencia de fontanería — Francisco González</title>
+  <meta name="description" content="Servicio de asistencia, reparación y presupuestos de fontanería en Sevilla. Francisco González. Contacto directo y preparación de avisos.">
+  <meta name="theme-color" content="#0d233e">
   <style>
     :root {
       --primary-dark: #0d233e;
@@ -18,6 +19,7 @@
       --amber-text: #855b00;
       --bg-body: #f4f6f9;
       --bg-surface: #ffffff;
+      --surface-subtle: #f8fafc;
       --border-subtle: #dbe2ea;
       --border-focus: #1c5bb9;
       --text-main: #192434;
@@ -25,8 +27,8 @@
       --green-wa: #128c7e;
       --green-wa-hover: #0d6d62;
       --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --tap-min: 48px;
     }
@@ -52,12 +54,12 @@
 
     .app-viewport {
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       background: var(--bg-surface);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
       position: relative;
     }
 
@@ -76,6 +78,7 @@
     .brand-group {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
 
     .brand-name {
@@ -101,6 +104,7 @@
       font-size: 0.88rem;
       font-weight: 600;
       min-height: 40px;
+      transition: background 0.15s;
     }
 
     .btn-header-call:hover, .btn-header-call:focus {
@@ -142,7 +146,7 @@
     main {
       flex: 1;
       padding: 20px 18px;
-      padding-bottom: 110px; /* Margen para la barra inferior fija */
+      padding-bottom: 110px;
     }
 
     .view-step {
@@ -195,7 +199,6 @@
       width: fit-content;
     }
 
-    /* Tarjetas de portada */
     .portal-card {
       border: 1.5px solid var(--border-subtle);
       border-radius: var(--radius-md);
@@ -205,12 +208,14 @@
       gap: 8px;
       background: var(--bg-surface);
       text-align: left;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
     }
 
     .portal-card:hover {
       border-color: var(--primary-blue);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
     }
 
     .portal-card-header {
@@ -220,9 +225,9 @@
     }
 
     .portal-card-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -240,7 +245,7 @@
     }
 
     .portal-card-title {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--primary-dark);
     }
@@ -252,7 +257,7 @@
     }
 
     .btn-card-action {
-      margin-top: 4px;
+      margin-top: 6px;
       min-height: 44px;
       display: flex;
       align-items: center;
@@ -270,20 +275,11 @@
       color: #ffffff;
     }
 
-    .portal-card-urgent .btn-card-action:hover {
-      background: #b02121;
-    }
-
     .portal-card-sched .btn-card-action {
       background: var(--primary-blue);
       color: #ffffff;
     }
 
-    .portal-card-sched .btn-card-action:hover {
-      background: var(--primary-blue-hover);
-    }
-
-    /* Avisos */
     .alert-banner {
       border-radius: var(--radius-sm);
       padding: 12px 14px;
@@ -306,10 +302,9 @@
       color: var(--amber-text);
     }
 
-    /* Opciones interactivas */
-    .options-stack {
-      display: flex;
-      flex-direction: column;
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 8px;
     }
 
@@ -349,7 +344,6 @@
       background: var(--primary-blue);
     }
 
-    /* Formularios */
     .form-group {
       display: flex;
       flex-direction: column;
@@ -406,7 +400,6 @@
       display: block;
     }
 
-    /* Fotografías */
     .upload-zone {
       border: 2px dashed var(--border-subtle);
       border-radius: var(--radius-sm);
@@ -478,11 +471,10 @@
       padding: 2px 4px;
     }
 
-    /* Resumen */
     .summary-card {
-      border: 1px solid var(--border-subtle);
+      border: 1.5px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 14px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -517,18 +509,75 @@
       word-break: break-word;
     }
 
-    /* Barra fija inferior */
+    /* SECCIÓN CORPORATIVA / SERVICIOS Y FAQ */
+    .info-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .service-item-card {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .service-item-title {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-item-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    .faq-q {
+      font-weight: 700;
+      font-size: 0.94rem;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .faq-a {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* BARRA INFERIOR FIJA */
     .docked-bar {
       position: fixed;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       background: #ffffff;
       padding: 10px 18px calc(10px + env(safe-area-inset-bottom, 0px));
       border-top: 1px solid var(--border-subtle);
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.05);
       display: flex;
       gap: 10px;
       z-index: 50;
@@ -547,8 +596,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       text-decoration: none;
+      transition: background 0.15s;
     }
 
     .btn-main-action:hover {
@@ -588,13 +638,13 @@
     }
 
     footer {
-      padding: 16px 18px;
+      padding: 18px;
       background: #eef2f6;
       border-top: 1px solid var(--border-subtle);
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       text-align: center;
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     .visually-hidden {
@@ -616,11 +666,11 @@
 <body>
   <div class="app-viewport">
     <header>
-      <div class="brand-group">
+      <div class="brand-group" onclick="app.renderStep('step-home')" role="button" tabindex="0">
         <span class="brand-name">Fontasevilla</span>
-        <span class="brand-tagline">Fontanería · Sevilla</span>
+        <span class="brand-tagline">Asistencia de fontanería · Sevilla</span>
       </div>
-      <a href="tel:+34616826965" class="btn-header-call" aria-label="Llamar directamente a Fontasevilla al 616 82 69 65">
+      <a href="tel:+34616826965" class="btn-header-call" aria-label="Llamar directamente al 616 82 69 65">
         <svg class="svg-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         Llamar
       </a>
@@ -630,334 +680,379 @@
       <div id="progress-bar" class="progress-fill"></div>
     </div>
 
-    <main>
-      <!-- PORTADA -->
+    <main id="main-content">
+      <!-- 1. PORTADA COMPACTA -->
       <section id="step-home" class="view-step active" aria-labelledby="title-home">
         <div>
-          <h1 id="title-home">¿En qué podemos ayudarte?</h1>
-          <p class="lead" style="margin-top: 4px;">Cuéntanos qué ocurre y prepara tu solicitud en unos sencillos pasos.</p>
+          <span style="font-size:0.85rem; font-weight:700; color:var(--primary-blue); text-transform:uppercase; letter-spacing:0.5px;">Francisco González</span>
+          <h1 id="title-home">¿Qué necesitas resolver?</h1>
+          <p class="lead" style="margin-top: 4px;">Cuéntanos qué ocurre y te ayudaremos a dar el siguiente paso.</p>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 6px;">
           <!-- Tarjeta Urgencia -->
-          <div class="portal-card portal-card-urgent">
+          <div class="portal-card portal-card-urgent" onclick="app.startFlow('urgent')">
             <div class="portal-card-header">
               <div class="portal-card-icon">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm1 14h-2v-2h2v2zm0-4h-2V8h2v4z"/></svg>
               </div>
-              <span class="portal-card-title">Urgencia de fontanería</span>
+              <div>
+                <span class="portal-card-title">Tengo una urgencia</span>
+                <span style="display:block; font-size:0.78rem; color:var(--accent-red); font-weight:600;">Atención prioritaria</span>
+              </div>
             </div>
-            <p class="portal-card-desc">Fuga, tubería rota u otra avería que requiere atención prioritaria.</p>
-            <button type="button" class="btn-card-action" onclick="app.startFlow('urgent')">Tengo una urgencia</button>
+            <p class="portal-card-desc">Fuga activa, rotura de tubería o atasco grave que requiere intervención rápida.</p>
+            <button type="button" class="btn-card-action">Iniciar solicitud de urgencia</button>
           </div>
 
-          <!-- Tarjeta Trabajo Programado -->
-          <div class="portal-card portal-card-sched">
+          <!-- Tarjeta Presupuesto / Programado -->
+          <div class="portal-card portal-card-sched" onclick="app.startFlow('sched')">
             <div class="portal-card-header">
               <div class="portal-card-icon">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
               </div>
-              <span class="portal-card-title">Trabajo programado</span>
+              <div>
+                <span class="portal-card-title">Quiero solicitar presupuesto</span>
+                <span style="display:block; font-size:0.78rem; color:var(--primary-blue); font-weight:600;">Planificación y reformas</span>
+              </div>
             </div>
-            <p class="portal-card-desc">Instalaciones, reparaciones y trabajos que quieres organizar con antelación.</p>
-            <button type="button" class="btn-card-action" onclick="app.startFlow('sched')">Solicitar un trabajo</button>
+            <p class="portal-card-desc">Instalaciones, sustitución de sanitarios, grifería o revisión general.</p>
+            <button type="button" class="btn-card-action">Solicitar presupuesto</button>
           </div>
         </div>
 
-        <div class="alert-banner alert-warn" style="margin-top: 10px;">
-          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
+        <!-- Acceso directo a información comercial -->
+        <div style="display:flex; justify-content:center; margin-top:8px;">
+          <button type="button" class="btn-dock-back" style="width:100%; border:none; background:var(--surface-subtle); color:var(--primary-blue);" onclick="app.renderStep('step-services-info')">
+            📖 Conoce nuestros servicios, cobertura y dudas frecuentes
+          </button>
+        </div>
+
+        <div class="alert-banner alert-warn" style="margin-top: 4px;">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
           <div>
-            <strong>Información de servicio:</strong> Fontasevilla opera con sede en C. Pino Siberia, 1, Sevilla. No se ofrece servicio de guardia permanente ni llegada inmediata sin confirmación previa.
+            <strong>Ubicación de referencia:</strong> C. Pino Siberia, 1, Sevilla. Atención sujeta a disponibilidad del profesional. No prometemos llegada inmediata ni servicio 24 horas sin confirmación previa.
           </div>
         </div>
       </section>
 
-      <!-- FLUJO URGENCIA: PASO 0 - SEGURIDAD Y ELECCIÓN -->
-      <section id="step-u-safety" class="view-step" aria-labelledby="title-u-safety">
+      <!-- SECCIÓN COMERCIAL / SERVICIOS CORPORATIVOS -->
+      <section id="step-services-info" class="view-step" aria-labelledby="title-info">
         <div class="step-indicator">
-          <span class="badge-urgent">Atención prioritaria</span>
-          <span>Aviso inicial</span>
+          <span class="badge-sched">Fontasevilla</span>
+          <span>Información de servicios</span>
         </div>
-        <h2 id="title-u-safety">Medidas de seguridad</h2>
+        <h2 id="title-info">Servicios de fontanería en Sevilla</h2>
+        <p class="lead">Atención directa prestada por Francisco González para particulares y comunidades.</p>
+
+        <div class="info-section">
+          <div class="services-grid">
+            <div class="service-item-card">
+              <span class="service-item-title">🛠️ Reparaciones y averías</span>
+              <span class="service-item-desc">Solución de fugas visibles, reparación de cisternas, grifos que gotean y atascos domésticos en fregaderos e inodoros.</span>
+            </div>
+            <div class="service-item-card">
+              <span class="service-item-title">🚿 Instalación de sanitarios y grifería</span>
+              <span class="service-item-desc">Montaje y sustitución de lavabos, inodoros, platos de ducha, columnas de hidromasaje y llaves de corte.</span>
+            </div>
+            <div class="service-item-card">
+              <span class="service-item-title">🔥 Calentadores y termos</span>
+              <span class="service-item-desc">Revisión de circuitos de agua caliente, sustitución de manguitos y verificación de presión en circuitos sanitarios.</span>
+            </div>
+            <div class="service-item-card">
+              <span class="service-item-title">🏗️ Reformas y canalizaciones</span>
+              <span class="service-item-desc">Adaptación de tuberías multicapa, cobre o PVC para reformas integrales de baños y cocinas en Sevilla.</span>
+            </div>
+          </div>
+
+          <h3 style="font-size:1.1rem; color:var(--primary-dark); margin-top:10px;">Preguntas frecuentes</h3>
+          
+          <div class="faq-item">
+            <div class="faq-q">¿Cómo funciona la solicitud desde esta microapp?</div>
+            <div class="faq-a">La herramienta te ayuda a detallar la avería y preparar un resumen ordenado. Podrás llamar directamente o abrir una conversación en WhatsApp con el mensaje ya estructurado para recibir respuesta.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">¿Se envía la solicitud a un servidor central?</div>
+            <div class="faq-a">No. Toda la información y fotografías se gestionan en tu navegador sin almacenarse en bases de datos externas. El contacto se establece directamente entre tú y el profesional.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">¿Qué debo hacer si tengo una fuga descontrolada?</div>
+            <div class="faq-a">Cierra de inmediato la llave de paso general de tu vivienda. Si el problema persiste o hay riesgo eléctrico, corta la luz y llama directamente al teléfono de contacto o al 112.</div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
+          <button type="button" class="btn-main-action" onclick="app.renderStep('step-home')">Volver al inicio</button>
+        </div>
+      </section>
+
+      <!-- FLUJO A (URGENCIAS): PASO 1 - IDENTIFICACIÓN VISUAL -->
+      <section id="step-u-issue" class="view-step" aria-labelledby="title-u-issue">
+        <div class="step-indicator">
+          <span class="badge-urgent">Urgencia</span>
+          <span>Paso 1 de 3</span>
+        </div>
+        <h2 id="title-u-issue">¿Qué avería estás sufriendo?</h2>
 
         <div class="alert-banner alert-danger">
           <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
           <div>
-            Si existe riesgo eléctrico, inundación severa que afecte a vecinos o peligro de lesiones, corta la luz si es seguro, aléjate del peligro y contacta con el 112.
+            <strong>Consejo de seguridad:</strong> Si el agua sigue saliendo, <strong>cierra la llave de paso general</strong> antes de continuar. Si hay riesgo de contacto eléctrico o peligro para personas, contacta con emergencias.
           </div>
         </div>
 
-        <div class="alert-banner alert-warn">
-          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2c-5.33 0-8 3.67-8 7.33 0 4.01 4.7 9.87 7.36 12.35.37.35.91.35 1.28 0C15.3 19.2 20 13.34 20 9.33 20 5.67 17.33 2 12 2z"/></svg>
-          <div>
-            <strong>Recomendación:</strong> Cierra la llave de paso general del agua para frenar la avería de forma inmediata.
-          </div>
-        </div>
-
-        <p class="lead">Para atención directa, puedes llamar ahora o continuar completando los datos para la solicitud.</p>
-
-        <a href="tel:+34616826965" class="btn-card-action" style="background:#1e7e34; color:#fff; text-decoration:none;">
-          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          Llamar ahora (+34 616 82 69 65)
-        </a>
-      </section>
-
-      <!-- FLUJO URGENCIA: PASO 1 - QUÉ OCURRE -->
-      <section id="step-u-issue" class="view-step" aria-labelledby="title-u-issue">
-        <div class="step-indicator">
-          <span class="badge-urgent">Urgencia</span>
-          <span id="label-step-u1">Paso 1 de 4</span>
-        </div>
-        <h2 id="title-u-issue">¿Qué está ocurriendo?</h2>
-
-        <div class="options-stack" id="opt-u-issues">
+        <div class="options-grid" id="opt-u-issues">
           <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Fuga de agua', this)">Fuga de agua</button>
           <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Tubería rota', this)">Tubería rota</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Desagüe atascado', this)">Desagüe atascado</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Problema con el inodoro', this)">Problema con el inodoro</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Problema con el grifo o lavabo', this)">Problema con el grifo o lavabo</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Problema con calentador / agua caliente', this)">Problema con calentador / agua caliente</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Baja presión de agua', this)">Baja presión de agua</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Atasco', this)">Atasco</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Problema con cisterna o grifo', this)">Problema con cisterna o grifo</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Calentador o agua caliente', this)">Calentador o agua caliente</button>
           <button type="button" class="choice-btn" onclick="app.selectOption('urgentIssue', 'Otro problema', this)">Otro problema</button>
         </div>
         <span id="err-u-issue" class="field-error">Selecciona qué avería tienes.</span>
       </section>
 
-      <!-- FLUJO URGENCIA: PASO 2 - SIGUE ACTIVA -->
+      <!-- FLUJO A (URGENCIAS): PASO 2 - ESTADO ACTIVO -->
       <section id="step-u-active" class="view-step" aria-labelledby="title-u-active">
         <div class="step-indicator">
           <span class="badge-urgent">Urgencia</span>
-          <span id="label-step-u2">Paso 2 de 4</span>
+          <span>Paso 2 de 3</span>
         </div>
-        <h2 id="title-u-active">¿Sigue activa la avería?</h2>
+        <h2 id="title-u-active">¿El problema continúa activo?</h2>
+        <p class="lead">Indica si sigue saliendo agua en este momento.</p>
 
-        <div class="options-stack" id="opt-u-active">
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentActive', 'Sí, sigue activo', this)">Sí, sigue saliendo agua / activo</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentActive', 'Controlado temporalmente (llave cortada)', this)">Controlado temporalmente (llave cortada)</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('urgentActive', 'No estoy seguro', this)">No estoy seguro</button>
+        <div class="options-grid" id="opt-u-active">
+          <button type="button" class="choice-btn" onclick="app.selectOption('urgentActive', 'Sí, sigue saliendo agua', this)">Sí, sigue saliendo agua</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('urgentActive', 'Controlado temporalmente (llave cerrada)', this)">Controlado temporalmente (llave cerrada)</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('urgentActive', 'No sale agua / No estoy seguro', this)">No sale agua / No estoy seguro</button>
         </div>
-        <span id="err-u-active" class="field-error">Indica el estado actual de la avería.</span>
+        <span id="err-u-active" class="field-error">Por favor indica el estado actual.</span>
 
-        <div id="box-active-call" class="alert-banner alert-danger" style="display:none; margin-top: 8px;">
-          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-          <div>
-            <strong>Avería activa:</strong> Te recomendamos llamar por teléfono en este momento para evitar daños mayores en el inmueble.
+        <div class="form-group" style="margin-top: 10px;">
+          <label for="f-u-address">Dirección o zona del aviso en Sevilla (opcional)</label>
+          <input type="text" id="f-u-address" placeholder="Ej. Calle Sierpes, Sevilla">
+        </div>
+      </section>
+
+      <!-- FLUJO A (URGENCIAS): PASO 3 - PANTALLA DE ACCIÓN DIRECTA -->
+      <section id="step-u-action" class="view-step" aria-labelledby="title-u-action">
+        <div class="step-indicator">
+          <span class="badge-urgent">Urgencia</span>
+          <span>Paso 3 de 3 · Contacto</span>
+        </div>
+        <h2 id="title-u-action">Contacta con Fontasevilla</h2>
+        <p class="lead">Resumen de tu incidencia preparado para comunicar de inmediato.</p>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <span class="summary-label">Avería</span>
+            <span class="summary-value" id="sum-u-issue">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Estado</span>
+            <span class="summary-value" id="sum-u-active">-</span>
+          </div>
+          <div class="summary-row" id="row-u-addr" style="display:none;">
+            <span class="summary-label">Ubicación facilitada</span>
+            <span class="summary-value" id="sum-u-addr">-</span>
           </div>
         </div>
+
+        <div class="alert-banner alert-warn">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+          <div>
+            <strong>Aviso de disponibilidad:</strong> No se garantiza servicio 24 horas continuo ni llegada inmediata sin confirmación por parte del fontanero. Para incidencias graves, se recomienda llamar por teléfono.
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px;">
+          <a href="tel:+34616826965" class="btn-main-action btn-danger-action">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            Llamar ahora (+34 616 82 69 65)
+          </a>
+
+          <a id="btn-u-wa" href="#" target="_blank" rel="noopener noreferrer" class="btn-main-action btn-wa-action">
+            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c4.56 0 8.25 3.69 8.25 8.24 0 2.2-.86 4.28-2.42 5.83a8.217 8.217 0 01-5.83 2.41c-1.42 0-2.83-.37-4.08-1.07l-.29-.17-3.03.8 1.05-2.94-.19-.3A8.188 8.188 0 013.79 11.9c0-4.55 3.7-8.23 8.26-8.23"/></svg>
+            Preparar WhatsApp de urgencia
+          </a>
+        </div>
       </section>
 
-      <!-- FLUJO PROGRAMADO: PASO 1 - TIPO DE TRABAJO -->
-      <section id="step-s-type" class="view-step" aria-labelledby="title-s-type">
+      <!-- FLUJO B (PROGRAMADO): PASO 1 - TIPO DE TRABAJO -->
+      <section id="step-b-type" class="view-step" aria-labelledby="title-b-type">
         <div class="step-indicator">
-          <span class="badge-sched">Trabajo programado</span>
-          <span>Paso 1 de 5</span>
+          <span class="badge-sched">Presupuesto</span>
+          <span>Paso 1 de 6</span>
         </div>
-        <h2 id="title-s-type">Tipo de trabajo que necesitas</h2>
+        <h2 id="title-b-type">¿Qué tipo de trabajo necesitas?</h2>
 
-        <div class="options-stack" id="opt-s-types">
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Instalar un grifo o lavabo', this)">Instalar un grifo o lavabo</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Sustituir un inodoro', this)">Sustituir un inodoro</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Instalar o cambiar una ducha / bañera', this)">Instalar o cambiar ducha / bañera</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Reparar avería menor', this)">Reparar avería menor</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Revisar una instalación', this)">Revisar una instalación</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Instalar o sustituir tuberías', this)">Instalar o sustituir tuberías</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Fontanería para reforma', this)">Fontanería para reforma</button>
-          <button type="button" class="choice-btn" onclick="app.selectOption('schedType', 'Otro trabajo', this)">Otro trabajo</button>
+        <div class="options-grid" id="opt-b-types">
+          <button type="button" class="choice-btn" onclick="app.selectOption('schedWorkType', 'Reparación de avería', this)">Reparación</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('schedWorkType', 'Instalación de fontanería', this)">Instalación</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('schedWorkType', 'Mantenimiento o revisión', this)">Mantenimiento</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('schedWorkType', 'Fontanería para reforma', this)">Reforma</button>
+          <button type="button" class="choice-btn" onclick="app.selectOption('schedWorkType', 'Trabajo distinto', this)">Trabajo distinto</button>
         </div>
-        <span id="err-s-type" class="field-error">Por favor selecciona una opción.</span>
+        <span id="err-b-type" class="field-error">Selecciona una categoría.</span>
       </section>
 
-      <!-- UBICACIÓN (PASO COMPARTIDO) -->
-      <section id="step-location" class="view-step" aria-labelledby="title-loc">
+      <!-- FLUJO B: PASO 2 - DESCRIPCIÓN -->
+      <section id="step-b-desc" class="view-step" aria-labelledby="title-b-desc">
         <div class="step-indicator">
-          <span id="badge-loc-type" class="badge-sched">Ubicación</span>
-          <span id="label-step-loc">Ubicación del servicio</span>
+          <span class="badge-sched">Presupuesto</span>
+          <span>Paso 2 de 6</span>
         </div>
-        <h2 id="title-loc">¿Dónde está el problema?</h2>
+        <h2 id="title-b-desc">Describe brevemente lo que necesitas</h2>
 
         <div class="form-group">
-          <label for="f-address">Dirección y número *</label>
-          <input type="text" id="f-address" placeholder="Ej. Calle Sierpes, 12" oninput="app.clearError('f-address', 'err-address')">
-          <span id="err-address" class="field-error">Indica la calle y número.</span>
+          <label for="f-b-desc">Detalles del trabajo <span class="field-hint">(opcional pero recomendado)</span></label>
+          <textarea id="f-b-desc" placeholder="Ej. Sustituir grifo de cocina y revisar sifón con goteo ocasional"></textarea>
+        </div>
+      </section>
+
+      <!-- FLUJO B: PASO 3 - UBICACIÓN -->
+      <section id="step-b-location" class="view-step" aria-labelledby="title-b-loc">
+        <div class="step-indicator">
+          <span class="badge-sched">Presupuesto</span>
+          <span>Paso 3 de 6</span>
+        </div>
+        <h2 id="title-b-loc">¿Dónde se realizará el servicio?</h2>
+
+        <div class="form-group">
+          <label for="f-b-address">Dirección y número *</label>
+          <input type="text" id="f-b-address" placeholder="Ej. Calle Resolana, 4" oninput="app.clearError('f-b-address', 'err-b-address')">
+          <span id="err-b-address" class="field-error">Indica la dirección del trabajo.</span>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div class="form-group">
-            <label for="f-cp">Código postal *</label>
-            <input type="text" id="f-cp" placeholder="41001" maxlength="5" inputmode="numeric" oninput="app.clearError('f-cp', 'err-cp')">
-            <span id="err-cp" class="field-error">C.P. de 5 dígitos.</span>
+            <label for="f-b-cp">Código postal *</label>
+            <input type="text" id="f-b-cp" placeholder="41002" maxlength="5" inputmode="numeric" oninput="app.clearError('f-b-cp', 'err-b-cp')">
+            <span id="err-b-cp" class="field-error">C.P. de 5 dígitos.</span>
           </div>
           <div class="form-group">
-            <label for="f-floor">Planta / Puerta <span class="field-hint">(opc.)</span></label>
-            <input type="text" id="f-floor" placeholder="3º A">
+            <label for="f-b-floor">Planta / Puerta <span class="field-hint">(opc.)</span></label>
+            <input type="text" id="f-b-floor" placeholder="2º Izq.">
           </div>
-        </div>
-
-        <div class="form-group">
-          <label for="f-property">Tipo de inmueble</label>
-          <select id="f-property">
-            <option value="Vivienda">Vivienda</option>
-            <option value="Comunidad de vecinos">Comunidad de vecinos</option>
-            <option value="Local comercial">Local comercial</option>
-            <option value="Oficina">Oficina</option>
-            <option value="Otro inmueble">Otro inmueble</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="f-access">Indicaciones de acceso <span class="field-hint">(opcional)</span></label>
-          <input type="text" id="f-access" placeholder="Ej. Timbre no funciona, entrada trasera">
         </div>
 
         <div style="margin-top: 4px;">
           <button type="button" class="btn-dock-back" style="width:100%; display:inline-flex; align-items:center; justify-content:center; gap:6px;" onclick="app.requestGps()">
             <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
-            Compartir ubicación GPS (opcional)
+            Compartir coordenadas GPS (opcional)
           </button>
           <span id="gps-status" style="display:block; font-size:0.8rem; color:var(--text-muted); margin-top:4px;"></span>
         </div>
       </section>
 
-      <!-- PASO PROGRAMADO: DESCRIPCIÓN Y FOTOGRAFÍAS -->
-      <section id="step-desc-photos" class="view-step" aria-labelledby="title-dp">
+      <!-- FLUJO B: PASO 4 - FOTOGRAFÍAS -->
+      <section id="step-b-photos" class="view-step" aria-labelledby="title-b-photos">
         <div class="step-indicator">
-          <span class="badge-sched">Trabajo programado</span>
-          <span>Paso 3 de 5</span>
+          <span class="badge-sched">Presupuesto</span>
+          <span>Paso 4 de 6</span>
         </div>
-        <h2 id="title-dp">Descripción y fotografías</h2>
+        <h2 id="title-b-photos">Fotografías del trabajo</h2>
+        <p class="lead">Hasta 4 imágenes para ayudar a valorar el material necesario (máx. 8 MB c/u).</p>
 
-        <div class="form-group">
-          <label for="f-desc">Descripción del trabajo *</label>
-          <textarea id="f-desc" placeholder="Detalla qué necesitas realizar..." oninput="app.clearError('f-desc', 'err-desc')"></textarea>
-          <span id="err-desc" class="field-error">Añade una descripción breve.</span>
+        <div class="upload-zone" onclick="document.getElementById('f-photos-input').click()" role="button" tabindex="0">
+          <svg class="svg-icon" style="width:28px; height:28px; color:var(--primary-blue);" viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
+          <span style="font-size:0.92rem; font-weight:600;">Añadir fotografías de la instalación</span>
+          <span style="font-size:0.78rem; color:var(--text-muted);">Procesadas localmente en tu teléfono</span>
+          <input type="file" id="f-photos-input" class="visually-hidden" accept="image/jpeg,image/png,image/webp" multiple onchange="app.handleFiles(event)">
         </div>
+        <span id="err-photos" class="field-error"></span>
 
-        <div class="form-group">
-          <label>Fotografías orientativas <span class="field-hint">(máx. 4 fotos, 8 MB c/u)</span></label>
-          <div class="upload-zone" onclick="document.getElementById('f-photos-input').click()" role="button" tabindex="0">
-            <svg class="svg-icon" style="width:24px; height:24px; color:var(--primary-blue);" viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
-            <span style="font-size:0.9rem; font-weight:600;">Seleccionar fotos del dispositivo</span>
-            <span style="font-size:0.78rem; color:var(--text-muted);">Procesadas localmente en tu navegador</span>
-            <input type="file" id="f-photos-input" class="visually-hidden" accept="image/jpeg,image/png,image/webp" multiple onchange="app.handleFiles(event)">
+        <div id="gallery-container" class="gallery-grid" aria-live="polite"></div>
+
+        <div class="alert-banner alert-warn" style="margin-top:6px;">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-6h-2v6zm1-10c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z"/></svg>
+          <div>
+            Las fotos no se guardan en ningún servidor externo. Si abres WhatsApp, deberás adjuntarlas en la conversación.
           </div>
-          <span id="err-photos" class="field-error"></span>
-          <div id="gallery-container" class="gallery-grid" aria-live="polite"></div>
-        </div>
-
-        <div class="form-group" style="margin-top: 6px;">
-          <label for="f-budget">Presupuesto orientativo <span class="field-hint">(opcional)</span></label>
-          <select id="f-budget">
-            <option value="Prefiero consultarlo">Prefiero consultarlo</option>
-            <option value="Menos de 150 €">Menos de 150 €</option>
-            <option value="150–400 €">150–400 €</option>
-            <option value="400–1.000 €">400–1.000 €</option>
-            <option value="Más de 1.000 €">Más de 1.000 €</option>
-          </select>
         </div>
       </section>
 
-      <!-- PASO PROGRAMADO: PREFERENCIA DE CITA -->
-      <section id="step-s-datetime" class="view-step" aria-labelledby="title-dt">
+      <!-- FLUJO B: PASO 5 - DISPONIBILIDAD -->
+      <section id="step-b-datetime" class="view-step" aria-labelledby="title-b-dt">
         <div class="step-indicator">
-          <span class="badge-sched">Trabajo programado</span>
-          <span>Paso 4 de 5</span>
+          <span class="badge-sched">Presupuesto</span>
+          <span>Paso 5 de 6</span>
         </div>
-        <h2 id="title-dt">Preferencia de fecha y horario</h2>
+        <h2 id="title-b-dt">Disponibilidad preferida</h2>
 
         <div class="form-group">
-          <label for="f-date">Fecha preferida <span class="field-hint">(orientativa)</span></label>
-          <input type="date" id="f-date">
+          <label for="f-b-date">Día preferido <span class="field-hint">(orientativo)</span></label>
+          <input type="date" id="f-b-date">
         </div>
 
         <div class="form-group">
-          <label for="f-slot">Franja horaria preferida</label>
-          <select id="f-slot">
+          <label for="f-b-slot">Franja horaria preferida</label>
+          <select id="f-b-slot">
             <option value="Franja de mañana (09:00 - 14:00)">Franja de mañana (09:00 - 14:00)</option>
             <option value="Franja de tarde (16:00 - 19:30)">Franja de tarde (16:00 - 19:30)</option>
-            <option value="Flexibilidad total">Flexibilidad total</option>
+            <option value="Flexibilidad horaria">Flexibilidad horaria</option>
           </select>
         </div>
 
         <div class="alert-banner alert-warn">
           <svg class="svg-icon" viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>
           <div>
-            <strong>Aviso de disponibilidad:</strong> Se trata de una indicación de preferencia. No es una cita cerrada; el profesional confirmará la viabilidad de la fecha en función de la agenda de trabajo.
+            Esta fecha es orientativa. El profesional tendrá que confirmar la disponibilidad real de la agenda.
           </div>
         </div>
       </section>
 
-      <!-- PASO: DATOS DE CONTACTO -->
-      <section id="step-contact" class="view-step" aria-labelledby="title-contact">
+      <!-- FLUJO B: PASO 6 - CONTACTO -->
+      <section id="step-b-contact" class="view-step" aria-labelledby="title-b-contact">
         <div class="step-indicator">
-          <span id="badge-contact-type" class="badge-sched">Contacto</span>
-          <span id="label-step-contact">Tus datos</span>
+          <span class="badge-sched">Presupuesto</span>
+          <span>Paso 6 de 6</span>
         </div>
-        <h2 id="title-contact">¿Cómo podemos contactar contigo?</h2>
+        <h2 id="title-b-contact">Datos de contacto</h2>
+        <p class="lead">Para responder a tu consulta de presupuesto.</p>
 
         <div class="form-group">
-          <label for="f-name">Nombre completo *</label>
-          <input type="text" id="f-name" placeholder="Ej. Antonio Morales" oninput="app.clearError('f-name', 'err-name')">
-          <span id="err-name" class="field-error">Indica tu nombre.</span>
-        </div>
-
-        <div class="form-group">
-          <label for="f-phone">Teléfono de contacto *</label>
-          <input type="tel" id="f-phone" placeholder="Ej. 612 345 678" inputmode="tel" oninput="app.clearError('f-phone', 'err-phone')">
-          <span id="err-phone" class="field-error">Introduce un teléfono de contacto válido (mín. 9 dígitos).</span>
+          <label for="f-b-name">Nombre completo *</label>
+          <input type="text" id="f-b-name" placeholder="Ej. Carmen Navarro" oninput="app.clearError('f-b-name', 'err-b-name')">
+          <span id="err-b-name" class="field-error">Indica tu nombre.</span>
         </div>
 
         <div class="form-group">
-          <label for="f-email">Correo electrónico <span class="field-hint">(opcional)</span></label>
-          <input type="email" id="f-email" placeholder="correo@ejemplo.com">
-        </div>
-
-        <div class="form-group">
-          <label for="f-contact-pref">Preferencia de respuesta</label>
-          <select id="f-contact-pref">
-            <option value="WhatsApp">Mensaje por WhatsApp</option>
-            <option value="Llamada">Llamada telefónica</option>
-          </select>
-        </div>
-
-        <!-- Si es urgencia, permitimos adjuntar foto aquí de manera opcional y rápida -->
-        <div id="u-extra-photo" style="display:none; margin-top:6px;">
-          <label>Fotografía de la avería <span class="field-hint">(opcional)</span></label>
-          <div class="upload-zone" onclick="document.getElementById('f-photos-input-u').click()" role="button" tabindex="0">
-            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/></svg>
-            <span style="font-size:0.85rem; font-weight:600;">Añadir foto opcional</span>
-            <input type="file" id="f-photos-input-u" class="visually-hidden" accept="image/jpeg,image/png,image/webp" multiple onchange="app.handleFiles(event)">
-          </div>
-          <div id="gallery-container-u" class="gallery-grid" aria-live="polite"></div>
+          <label for="f-b-phone">Teléfono de contacto *</label>
+          <input type="tel" id="f-b-phone" placeholder="Ej. 612 345 678" inputmode="tel" oninput="app.clearError('f-b-phone', 'err-b-phone')">
+          <span id="err-b-phone" class="field-error">Introduce un teléfono de contacto válido (mín. 9 dígitos).</span>
         </div>
       </section>
 
-      <!-- RESUMEN FINAL -->
-      <section id="step-summary" class="view-step" aria-labelledby="title-summary">
+      <!-- FLUJO B: PASO 7 - REVISIÓN FINAL -->
+      <section id="step-b-review" class="view-step" aria-labelledby="title-b-review">
         <div class="step-indicator">
-          <span id="badge-summary" class="badge-sched">Resumen</span>
+          <span class="badge-sched">Presupuesto</span>
           <span>Revisión final</span>
         </div>
-        <h2 id="title-summary">Resumen de tu solicitud</h2>
-        <p class="lead">Comprueba la información antes de iniciar el contacto.</p>
+        <h2 id="title-b-review">Revisa tu solicitud de presupuesto</h2>
+        <p class="lead">Comprueba la información antes de abrir el canal de contacto.</p>
 
-        <div class="summary-card" id="summary-data-box"></div>
+        <div class="summary-card" id="b-summary-data"></div>
 
         <div class="alert-banner alert-warn">
           <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-6h-2v6zm1-10c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z"/></svg>
           <div>
-            <strong>Aviso de fotografías:</strong> Las fotografías no se adjuntan automáticamente al mensaje. Si quieres enviarlas, tendrás que seleccionarlas manualmente en WhatsApp.
+            <strong>Recordatorio:</strong> Si has tomado fotografías, adjúntalas manualmente en el chat de WhatsApp al abrirse.
           </div>
         </div>
 
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <a id="btn-open-wa" href="#" target="_blank" rel="noopener noreferrer" class="btn-main-action btn-wa-action">
+          <a id="btn-b-wa" href="#" target="_blank" rel="noopener noreferrer" class="btn-main-action btn-wa-action">
             <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c4.56 0 8.25 3.69 8.25 8.24 0 2.2-.86 4.28-2.42 5.83a8.217 8.217 0 01-5.83 2.41c-1.42 0-2.83-.37-4.08-1.07l-.29-.17-3.03.8 1.05-2.94-.19-.3A8.188 8.188 0 013.79 11.9c0-4.55 3.7-8.23 8.26-8.23"/></svg>
-            Preparar mensaje por WhatsApp
+            Preparar WhatsApp con mi solicitud
           </a>
 
           <a href="tel:+34616826965" class="btn-main-action" style="background:var(--primary-dark);">
             <svg class="svg-icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            Llamar a Fontasevilla (+34 616 82 69 65)
+            Llamar directamente (+34 616 82 69 65)
           </a>
         </div>
       </section>
@@ -970,9 +1065,9 @@
     </div>
 
     <footer>
-      <strong>Fontasevilla — Francisco González</strong><br>
-      C. Pino Siberia, 1, Sevilla • Tel: +34 616 82 69 65<br><br>
-      <em>Prototipo conceptual independiente para Fontasevilla. No es un canal oficial de recepción de avisos. La disponibilidad, los horarios, los presupuestos y las citas deben confirmarse directamente con el profesional.</em>
+      <strong>Fontasevilla · Asistencia de fontanería</strong><br>
+      Francisco González • C. Pino Siberia, 1, Sevilla • Tel: +34 616 82 69 65<br><br>
+      <em>Herramienta de asistencia y preparación de solicitudes para Fontasevilla. Presupuestos y disponibilidad sujetos a confirmación directa con el profesional.</em>
     </footer>
   </div>
 
@@ -983,50 +1078,35 @@
       const APP_PHONE_INTL = '34616826965';
 
       const state = {
-        flow: null, // 'urgent' | 'sched'
+        flow: null,
         currentStep: 'step-home',
+        // Flujo A
         urgentIssue: '',
         urgentActive: '',
-        schedType: '',
+        urgentAddress: '',
+        // Flujo B
+        schedWorkType: '',
+        description: '',
         address: '',
         postalCode: '',
         floor: '',
-        propertyType: 'Vivienda',
-        accessNotes: '',
         gpsCoords: '',
-        description: '',
         schedDate: '',
         schedSlot: 'Franja de mañana (09:00 - 14:00)',
-        schedBudget: 'Prefiero consultarlo',
         contactName: '',
         contactPhone: '',
-        contactEmail: '',
-        contactPref: 'WhatsApp',
-        photos: [] // { file, name, size, url }
+        photos: []
       };
 
       const flowSteps = {
-        urgent: ['step-u-safety', 'step-u-issue', 'step-u-active', 'step-location', 'step-contact', 'step-summary'],
-        sched: ['step-s-type', 'step-location', 'step-desc-photos', 'step-s-datetime', 'step-contact', 'step-summary']
+        urgent: ['step-u-issue', 'step-u-active', 'step-u-action'],
+        sched: ['step-b-type', 'step-b-desc', 'step-b-location', 'step-b-photos', 'step-b-datetime', 'step-b-contact', 'step-b-review']
       };
 
       window.app = {
         startFlow(flowType) {
           state.flow = flowType;
-          const isU = (flowType === 'urgent');
-
-          document.getElementById('badge-loc-type').className = isU ? 'badge-urgent' : 'badge-sched';
-          document.getElementById('badge-loc-type').textContent = isU ? 'Urgencia' : 'Trabajo programado';
-          document.getElementById('badge-contact-type').className = isU ? 'badge-urgent' : 'badge-sched';
-          document.getElementById('badge-contact-type').textContent = isU ? 'Urgencia' : 'Trabajo programado';
-
-          document.getElementById('label-step-loc').textContent = isU ? 'Paso 3 de 4' : 'Paso 2 de 5';
-          document.getElementById('label-step-contact').textContent = isU ? 'Paso 4 de 4' : 'Paso 5 de 5';
-
-          document.getElementById('u-extra-photo').style.display = isU ? 'block' : 'none';
-
-          const firstStep = flowSteps[flowType][0];
-          app.renderStep(firstStep);
+          app.renderStep(flowSteps[flowType][0]);
         },
 
         renderStep(stepId) {
@@ -1037,18 +1117,17 @@
             target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }
-
-          app.updateProgressAndBar();
+          app.updateBarAndProgress();
         },
 
-        updateProgressAndBar() {
+        updateBarAndProgress() {
           const barWrap = document.getElementById('progress-container');
           const barFill = document.getElementById('progress-bar');
           const dockedBar = document.getElementById('sticky-bar');
           const nextBtn = document.getElementById('btn-bar-next');
           const backBtn = document.getElementById('btn-bar-back');
 
-          if (state.currentStep === 'step-home') {
+          if (state.currentStep === 'step-home' || state.currentStep === 'step-services-info') {
             barWrap.style.display = 'none';
             dockedBar.style.display = 'none';
             return;
@@ -1064,8 +1143,8 @@
           const pct = Math.round(((currentIndex + 1) / totalSteps) * 100);
           barFill.style.width = pct + '%';
 
-          if (state.currentStep === 'step-summary') {
-            backBtn.textContent = 'Editar solicitud';
+          if (state.currentStep === 'step-u-action' || state.currentStep === 'step-b-review') {
+            backBtn.textContent = 'Editar datos';
             nextBtn.textContent = 'Nueva solicitud';
             nextBtn.style.background = '#5e6f84';
           } else {
@@ -1076,13 +1155,10 @@
         },
 
         navNext() {
-          const current = state.currentStep;
+          const cur = state.currentStep;
 
-          if (current === 'step-u-safety') {
-            app.renderStep('step-u-issue');
-            return;
-          }
-          if (current === 'step-u-issue') {
+          // Urgencias
+          if (cur === 'step-u-issue') {
             if (!state.urgentIssue) {
               app.showError('err-u-issue');
               return;
@@ -1090,55 +1166,67 @@
             app.renderStep('step-u-active');
             return;
           }
-          if (current === 'step-u-active') {
+          if (cur === 'step-u-active') {
             if (!state.urgentActive) {
               app.showError('err-u-active');
               return;
             }
-            app.renderStep('step-location');
+            state.urgentAddress = document.getElementById('f-u-address').value.trim();
+            app.buildUrgentAction();
+            app.renderStep('step-u-action');
             return;
           }
-          if (current === 'step-s-type') {
-            if (!state.schedType) {
-              app.showError('err-s-type');
+          if (cur === 'step-u-action') {
+            app.resetForm();
+            return;
+          }
+
+          // Programado
+          if (cur === 'step-b-type') {
+            if (!state.schedWorkType) {
+              app.showError('err-b-type');
               return;
             }
-            app.renderStep('step-location');
+            app.renderStep('step-b-desc');
             return;
           }
-          if (current === 'step-location') {
+          if (cur === 'step-b-desc') {
+            state.description = document.getElementById('f-b-desc').value.trim();
+            app.renderStep('step-b-location');
+            return;
+          }
+          if (cur === 'step-b-location') {
             if (!app.validateLocation()) return;
-            if (state.flow === 'urgent') {
-              app.renderStep('step-contact');
-            } else {
-              app.renderStep('step-desc-photos');
-            }
+            app.renderStep('step-b-photos');
             return;
           }
-          if (current === 'step-desc-photos') {
-            if (!app.validateDesc()) return;
-            app.renderStep('step-s-datetime');
+          if (cur === 'step-b-photos') {
+            app.renderStep('step-b-datetime');
             return;
           }
-          if (current === 'step-s-datetime') {
-            state.schedDate = document.getElementById('f-date').value;
-            state.schedSlot = document.getElementById('f-slot').value;
-            app.renderStep('step-contact');
+          if (cur === 'step-b-datetime') {
+            state.schedDate = document.getElementById('f-b-date').value;
+            state.schedSlot = document.getElementById('f-b-slot').value;
+            app.renderStep('step-b-contact');
             return;
           }
-          if (current === 'step-contact') {
+          if (cur === 'step-b-contact') {
             if (!app.validateContact()) return;
-            app.buildSummary();
-            app.renderStep('step-summary');
+            app.buildReview();
+            app.renderStep('step-b-review');
             return;
           }
-          if (current === 'step-summary') {
+          if (cur === 'step-b-review') {
             app.resetForm();
             return;
           }
         },
 
         navBack() {
+          if (state.currentStep === 'step-services-info') {
+            app.renderStep('step-home');
+            return;
+          }
           const steps = flowSteps[state.flow];
           const idx = steps.indexOf(state.currentStep);
           if (idx <= 0) {
@@ -1155,12 +1243,8 @@
           btnEl.classList.add('selected');
 
           if (key === 'urgentIssue') app.hideError('err-u-issue');
-          if (key === 'urgentActive') {
-            app.hideError('err-u-active');
-            const box = document.getElementById('box-active-call');
-            box.style.display = (value.indexOf('Sí') !== -1) ? 'flex' : 'none';
-          }
-          if (key === 'schedType') app.hideError('err-s-type');
+          if (key === 'urgentActive') app.hideError('err-u-active');
+          if (key === 'schedWorkType') app.hideError('err-b-type');
         },
 
         clearError(inputId, errId) {
@@ -1184,61 +1268,46 @@
         },
 
         validateLocation() {
-          const addr = document.getElementById('f-address').value.trim();
-          const cp = document.getElementById('f-cp').value.trim();
+          const addr = document.getElementById('f-b-address').value.trim();
+          const cp = document.getElementById('f-b-cp').value.trim();
           let valid = true;
 
           const cpRegex = /^[0-9]{5}$/;
           if (!cpRegex.test(cp)) {
-            app.showError('err-cp', 'f-cp');
+            app.showError('err-b-cp', 'f-b-cp');
             valid = false;
           }
           if (!addr) {
-            app.showError('err-address', 'f-address');
+            app.showError('err-b-address', 'f-b-address');
             valid = false;
           }
 
           if (valid) {
             state.address = addr;
             state.postalCode = cp;
-            state.floor = document.getElementById('f-floor').value.trim();
-            state.propertyType = document.getElementById('f-property').value;
-            state.accessNotes = document.getElementById('f-access').value.trim();
+            state.floor = document.getElementById('f-b-floor').value.trim();
           }
           return valid;
         },
 
-        validateDesc() {
-          const desc = document.getElementById('f-desc').value.trim();
-          if (!desc) {
-            app.showError('err-desc', 'f-desc');
-            return false;
-          }
-          state.description = desc;
-          state.schedBudget = document.getElementById('f-budget').value;
-          return true;
-        },
-
         validateContact() {
-          const name = document.getElementById('f-name').value.trim();
-          const phone = document.getElementById('f-phone').value.trim();
+          const name = document.getElementById('f-b-name').value.trim();
+          const phone = document.getElementById('f-b-phone').value.trim();
           let valid = true;
 
-          const phoneDigits = phone.replace(/[^0-9]/g, '');
-          if (phoneDigits.length < 9) {
-            app.showError('err-phone', 'f-phone');
+          const digits = phone.replace(/[^0-9]/g, '');
+          if (digits.length < 9) {
+            app.showError('err-b-phone', 'f-b-phone');
             valid = false;
           }
           if (!name) {
-            app.showError('err-name', 'f-name');
+            app.showError('err-b-name', 'f-b-name');
             valid = false;
           }
 
           if (valid) {
             state.contactName = name;
             state.contactPhone = phone;
-            state.contactEmail = document.getElementById('f-email').value.trim();
-            state.contactPref = document.getElementById('f-contact-pref').value;
           }
           return valid;
         },
@@ -1246,21 +1315,21 @@
         requestGps() {
           const st = document.getElementById('gps-status');
           if (!navigator.geolocation) {
-            st.textContent = 'Tu navegador no admite geolocalización. Introduce la dirección manualmente.';
+            st.textContent = 'La geolocalización no es compatible con este navegador.';
             return;
           }
-          st.textContent = 'Consultando ubicación GPS...';
+          st.textContent = 'Solicitando coordenadas GPS...';
           navigator.geolocation.getCurrentPosition(
             pos => {
               const lat = pos.coords.latitude.toFixed(5);
               const lon = pos.coords.longitude.toFixed(5);
               state.gpsCoords = `${lat}, ${lon}`;
-              st.textContent = `Ubicación capturada: (${lat}, ${lon})`;
+              st.textContent = `Coordenadas capturadas: (${lat}, ${lon})`;
             },
             () => {
-              st.textContent = 'Permiso no concedido. Puedes introducir la calle manualmente sin problema.';
+              st.textContent = 'Permiso no concedido. Puedes introducir la dirección manualmente.';
             },
-            { timeout: 7000 }
+            { timeout: 8000 }
           );
         },
 
@@ -1280,7 +1349,7 @@
               break;
             }
             if (!validTypes.includes(f.type)) {
-              errEl.textContent = `Formato no compatible en ${f.name}. Usa JPG, PNG o WebP.`;
+              errEl.textContent = `Formato no admitido en ${f.name}. Usa JPEG, PNG o WebP.`;
               errEl.classList.add('active');
               continue;
             }
@@ -1307,34 +1376,49 @@
         },
 
         renderGallery() {
-          const containers = [document.getElementById('gallery-container'), document.getElementById('gallery-container-u')];
-          containers.forEach(box => {
-            if (!box) return;
-            box.innerHTML = '';
-            state.photos.forEach((ph, i) => {
-              const card = document.createElement('div');
-              card.className = 'gallery-card';
-              card.innerHTML = `
-                <div class="gallery-thumb-wrap">
-                  <img src="${ph.url}" alt="${ph.name}">
-                </div>
-                <div class="gallery-meta">
-                  <span title="${ph.name}">${ph.name}</span>
-                  <button type="button" class="btn-del-img" onclick="app.removePhoto(${i})">Eliminar</button>
-                </div>
-              `;
-              box.appendChild(card);
-            });
+          const container = document.getElementById('gallery-container');
+          container.innerHTML = '';
+          state.photos.forEach((ph, i) => {
+            const card = document.createElement('div');
+            card.className = 'gallery-card';
+            card.innerHTML = `
+              <div class="gallery-thumb-wrap">
+                <img src="${ph.url}" alt="${ph.name}">
+              </div>
+              <div class="gallery-meta">
+                <span title="${ph.name}">${ph.name}</span>
+                <button type="button" class="btn-del-img" onclick="app.removePhoto(${i})">Eliminar</button>
+              </div>
+            `;
+            container.appendChild(card);
           });
         },
 
-        buildSummary() {
-          const isU = (state.flow === 'urgent');
-          const badge = document.getElementById('badge-summary');
-          badge.className = isU ? 'badge-urgent' : 'badge-sched';
-          badge.textContent = isU ? 'Urgencia prioritaria' : 'Trabajo programado';
+        buildUrgentAction() {
+          document.getElementById('sum-u-issue').textContent = state.urgentIssue;
+          document.getElementById('sum-u-active').textContent = state.urgentActive;
+          const rowAddr = document.getElementById('row-u-addr');
+          if (state.urgentAddress) {
+            rowAddr.style.display = 'flex';
+            document.getElementById('sum-u-addr').textContent = state.urgentAddress;
+          } else {
+            rowAddr.style.display = 'none';
+          }
 
-          const box = document.getElementById('summary-data-box');
+          const lines = [
+            `🚨 *AVISO DE URGENCIA — FONTASEVILLA*`,
+            `• Avería: ${state.urgentIssue}`,
+            `• Estado actual: ${state.urgentActive}`
+          ];
+          if (state.urgentAddress) lines.push(`• Ubicación / Zona: ${state.urgentAddress}`);
+          lines.push(`¿Podéis indicarme si tenéis disponibilidad para atender esta incidencia en Sevilla?`);
+
+          const msg = lines.join('\n');
+          document.getElementById('btn-u-wa').href = `https://wa.me/${APP_PHONE_INTL}?text=${encodeURIComponent(msg)}`;
+        },
+
+        buildReview() {
+          const box = document.getElementById('b-summary-data');
           let rows = '';
 
           const addRow = (label, val) => {
@@ -1348,61 +1432,35 @@
             }
           };
 
-          addRow('Tipo de solicitud', isU ? 'Urgencia de fontanería' : 'Trabajo programado');
-          if (isU) {
-            addRow('Avería', state.urgentIssue);
-            addRow('Estado actual', state.urgentActive);
-          } else {
-            addRow('Trabajo solicitado', state.schedType);
-            addRow('Descripción', state.description);
-            const dateStr = state.schedDate ? `${state.schedDate} (${state.schedSlot})` : `Sin fecha fija (${state.schedSlot})`;
-            addRow('Preferencia de cita', dateStr);
-            if (state.schedBudget && state.schedBudget !== 'Prefiero consultarlo') {
-              addRow('Presupuesto orientativo', state.schedBudget);
-            }
-          }
+          addRow('Tipo de trabajo', state.schedWorkType);
+          addRow('Descripción', state.description || 'No especificada');
+          let loc = `${state.address}`;
+          if (state.floor) loc += `, ${state.floor}`;
+          loc += ` (C.P. ${state.postalCode}, Sevilla)`;
+          if (state.gpsCoords) loc += ` • GPS: ${state.gpsCoords}`;
+          addRow('Ubicación del trabajo', loc);
 
-          let locStr = `${state.address}`;
-          if (state.floor) locStr += `, ${state.floor}`;
-          locStr += ` (C.P. ${state.postalCode}, ${state.propertyType})`;
-          if (state.gpsCoords) locStr += ` • GPS: ${state.gpsCoords}`;
-          addRow('Ubicación del servicio', locStr);
-
-          if (state.accessNotes) {
-            addRow('Indicaciones de acceso', state.accessNotes);
-          }
-
-          addRow('Contacto', `${state.contactName} • ${state.contactPhone}${state.contactEmail ? ' • ' + state.contactEmail : ''} (Prefiere ${state.contactPref})`);
-          addRow('Fotografías locales', state.photos.length > 0 ? `${state.photos.length} foto(s) preparadas localmente` : 'Ninguna seleccionada');
+          const dt = state.schedDate ? `${state.schedDate} (${state.schedSlot})` : state.schedSlot;
+          addRow('Disponibilidad orientativa', dt);
+          addRow('Contacto', `${state.contactName} • Tel: ${state.contactPhone}`);
+          addRow('Fotografías locales', state.photos.length > 0 ? `${state.photos.length} fotografía(s) seleccionadas` : 'Ninguna');
 
           box.innerHTML = rows;
 
-          // Construcción limpia del mensaje de WhatsApp
-          let msgLines = [];
-          if (isU) {
-            msgLines.push(`Hola, soy ${state.contactName}. Quería consultar una avería urgente de fontanería.`);
-            msgLines.push(`• Tipo de avería: ${state.urgentIssue}`);
-            msgLines.push(`• Estado: ${state.urgentActive}`);
-            msgLines.push(`• Dirección: ${state.address}${state.floor ? ', ' + state.floor : ''} (C.P. ${state.postalCode})`);
-            if (state.gpsCoords) msgLines.push(`• GPS: ${state.gpsCoords}`);
-            if (state.accessNotes) msgLines.push(`• Acceso: ${state.accessNotes}`);
-            msgLines.push(`• Contacto: ${state.contactPhone}`);
-            msgLines.push(`¿Podéis indicarme si tenéis disponibilidad para atender esta incidencia?`);
-          } else {
-            msgLines.push(`Hola, soy ${state.contactName}. Quería solicitar presupuesto o consultar cita para un trabajo de fontanería.`);
-            msgLines.push(`• Trabajo: ${state.schedType}`);
-            msgLines.push(`• Descripción: ${state.description}`);
-            msgLines.push(`• Ubicación: ${state.address}${state.floor ? ', ' + state.floor : ''} (C.P. ${state.postalCode})`);
-            if (state.schedDate) msgLines.push(`• Fecha preferida: ${state.schedDate} (${state.schedSlot})`);
-            else msgLines.push(`• Preferencia de horario: ${state.schedSlot}`);
-            if (state.schedBudget && state.schedBudget !== 'Prefiero consultarlo') msgLines.push(`• Rango estimado: ${state.schedBudget}`);
-            if (state.accessNotes) msgLines.push(`• Acceso: ${state.accessNotes}`);
-            msgLines.push(`• Contacto: ${state.contactPhone}`);
-            msgLines.push(`¿Podríais confirmarme disponibilidad y cómo proceder?`);
-          }
+          const lines = [
+            `📋 *SOLICITUD DE PRESUPUESTO — FONTASEVILLA*`,
+            `• Solicitante: ${state.contactName}`,
+            `• Teléfono: ${state.contactPhone}`,
+            `• Tipo de trabajo: ${state.schedWorkType}`
+          ];
+          if (state.description) lines.push(`• Descripción: ${state.description}`);
+          lines.push(`• Ubicación: ${state.address}${state.floor ? ', ' + state.floor : ''} (C.P. ${state.postalCode})`);
+          if (state.gpsCoords) lines.push(`• GPS: ${state.gpsCoords}`);
+          lines.push(`• Fecha orientativa: ${state.schedDate ? state.schedDate + ' (' + state.schedSlot + ')' : state.schedSlot}`);
+          lines.push(`¿Podrías confirmarme disponibilidad para valorar el trabajo?`);
 
-          const rawText = msgLines.join('\n');
-          document.getElementById('btn-open-wa').href = `https://wa.me/${APP_PHONE_INTL}?text=${encodeURIComponent(rawText)}`;
+          const msg = lines.join('\n');
+          document.getElementById('btn-b-wa').href = `https://wa.me/${APP_PHONE_INTL}?text=${encodeURIComponent(msg)}`;
         },
 
         resetForm() {
@@ -1411,23 +1469,30 @@
           state.flow = null;
           state.urgentIssue = '';
           state.urgentActive = '';
-          state.schedType = '';
+          state.urgentAddress = '';
+          state.schedWorkType = '';
+          state.description = '';
+          state.address = '';
+          state.postalCode = '';
+          state.floor = '';
           state.gpsCoords = '';
+          state.schedDate = '';
+          state.contactName = '';
+          state.contactPhone = '';
 
           document.querySelectorAll('input').forEach(i => { if (i.type !== 'file') i.value = ''; });
-          document.querySelectorAll('textarea').forEach(t => t.value = '');
+          document.querySelectorAll('textarea').forEach(t => t.value = ''; );
           document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
           document.querySelectorAll('.field-error').forEach(e => e.classList.remove('active'));
           document.querySelectorAll('.input-invalid').forEach(i => i.classList.remove('input-invalid'));
 
           document.getElementById('gps-status').textContent = '';
-          document.getElementById('box-active-call').style.display = 'none';
           app.renderGallery();
           app.renderStep('step-home');
         }
       };
 
-      const dateField = document.getElementById('f-date');
+      const dateField = document.getElementById('f-b-date');
       if (dateField) {
         dateField.min = new Date().toISOString().split('T')[0];
       }
